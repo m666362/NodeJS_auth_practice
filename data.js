@@ -3,7 +3,7 @@ const ROLE = {
     BASIC: "basic"
 }
 
-module.exports = {
+module.exports.data = {
     ROLE,
     users: [
         {id: 1, name: "Rayhan", role: ROLE.ADMIN},
