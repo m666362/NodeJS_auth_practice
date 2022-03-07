@@ -3,6 +3,8 @@ const ROLE = {
     BASIC: "basic"
 }
 
+
+
 module.exports.data = {
     ROLE,
     users: [
