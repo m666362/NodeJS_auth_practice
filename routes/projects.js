@@ -2,14 +2,21 @@ const express = require("express");
 const router = express.Router();
 const data = require("../data");
 const auth = require("../basicAuth");
+const permission = require("../permissions/project");
 
-router.get("/", (req, res) => {
-  res.send({ projects: data.data.projects });
+router.get("/", auth.authUser, (req, res) => {
+  res.send({ projects: permission.scopedProject(req.user, data.data.projects) });
 });
 
-router.get("/:projectId", auth.authUser, setProject, (req, res) => {
-  res.send({ projects: req.project, user: req.user });
-});
+router.get("/:projectId",auth.authUser,setProject,authGetProject,(req, res) => {
+    res.send({ projects: req.project, user: req.user });
+  }
+);
+
+router.delete("/:projectId",auth.authUser,setProject, authDeleteProject,(req, res) => {
+  res.send("Project is deleted");
+}
+);
 
 function setProject(req, res, next) {
   const projectId = req.params.projectId;
@@ -17,9 +24,22 @@ function setProject(req, res, next) {
   if (req.project == null) {
     res.status(404);
     return res.send("Page not found");
-  } else if (req.user.id != req.project.userId) {
-    res.status(403);
-    return res.send("You dont have permission to access this project");
+  }
+  next();
+}
+
+function authGetProject(req, res, next) {
+  if (!permission.canViewProject(req.user, req.project)) {
+    res.status(401);
+    return res.send("Not allowed!!!");
+  }
+  next();
+}
+
+function authDeleteProject(req, res, next) {
+  if (!permission.canDeleteProject(req.user, req.project)) {
+    res.status(401);
+    return res.send("Not allowed!!!");
   }
   next();
 }
