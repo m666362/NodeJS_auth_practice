@@ -1,51 +1,25 @@
-// const { v4: uuidv4 } = require('uuid');
-// let db = {};
-// db['users'] = [{
-//     id: uuidv4(),
-//     name: "Md Jihan",
-//     email: "mdrayhan9464@gmail.com",
-//     password: "something",
-//     status: "Admin"
-// }];
-// db['status'] = [];
-// db['photos'] = [];
+// process.stdin.resume();         
+// process.stdin.setEncoding("ascii"); 
+// _input = "";
+// process.stdin.on("data", function (input) {
+//     _input += input;            
+// });
 
-// const insertUser = (user)=>{
-//     let dbUser = {
-//         id: uuidv4(),
-//         email: user.email,
-//         password: user.password,
-//         name: user.name,
-//         status: user.status
-//     }
-//     db = {
-//         ...db,
-//         users: [
-//             ...db.users, dbUser
-//         ]
-//     }
-// }
+// process.stdin.on("end", function () {
+//    processData(_input);         
+// });
 
-// let db = {};
-// db['users'] = [{
-//     id: uuidv4(),
-//     name: "Md Jihan",
-//     email: "mdrayhan9464@gmail.com",
-//     password: "something",
-//     status: "Admin"
-// }];
-// db['status'] = [];
-// db['photos'] = [];
-// let user = {
-//     id: uuidv4(),
-//     name: "Md Rayhan",
-//     email: "mdrayhan9464@gmail.com",
-//     password: "something"
-// }
-// db = {
-//     ...db,
-//     users: [
-//         ...db.users, user
-//     ]
-// }
-// console.log({id: uuidv4(), db: JSON.stringify(db)});
+// function processData(input) {
+
+//     console.log(input)        // => 5
+
+//     input = input.split("\n");
+
+//     console.log(input)        
+// } 
+const LinkedList = require('./linkedList');
+const ll = new LinkedList();
+ll.insertAtHead(10);
+ll.insertAtHead(20);
+ll.insertAtHead(30);
+console.log(JSON.stringify(ll));
